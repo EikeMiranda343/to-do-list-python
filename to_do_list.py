@@ -21,11 +21,23 @@ def listar_tarefa():
 
 def remover_tarefa():
     listar_tarefa()
-    print()
-    indice = input('Digite o número da tarefa que deseja remover: ')
-    tarefa_removida = tarefas.pop(int(indice) - 1)
+    indice = int(input('Digite o número da tarefa que deseja remover: ')) - 1
+    tarefa_removida = tarefas.pop(indice)
     print(f'Tarefa "{tarefa_removida}" removida com sucesso!')
     print()
+
+def concluir_tarefa():
+    listar_tarefa()
+    if tarefas:
+        indice = int(input('Digite o número da tarefa que deseja concluir: ')) - 1
+        print()
+        if 0 <= indice <= len(tarefas):
+            tarefas[indice] = tarefas[indice].replace(' - Concluída', '')
+            tarefa_concluida = tarefas[indice] + ' - Concluída'
+            tarefas[indice] = tarefa_concluida
+            print(f'Tarefa "{tarefa_concluida}" marcada como concluída!')
+            print()
+
 
 def to_do_list():
     while True:
@@ -39,7 +51,7 @@ def to_do_list():
         elif opcao == 3:
             remover_tarefa()
         elif opcao == 4:
-            listar_tarefa()
+            concluir_tarefa()
         else:
             print('Saindo...')
             break
